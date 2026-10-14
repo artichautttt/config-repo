@@ -1,3 +1,4 @@
 campus:
   environment: dev
-  message: "Portail enseignants DEV - fichier externe"
+  message: "Portail enseignants DEV - Git"
+  release: r2
