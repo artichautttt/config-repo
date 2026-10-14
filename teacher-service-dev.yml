@@ -1,4 +1,4 @@
 campus:
   environment: dev
-  message: "Portail enseignants DEV - Git"
-  release: r2
+  message: "Portail enseignants DEV - r3"
+  release: r3
