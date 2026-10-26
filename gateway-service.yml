@@ -18,3 +18,28 @@ spring:
               filters:
                 - StripPrefix=1
                 - AddResponseHeader=X-Gateway, gateway-service
+                - name: CircuitBreaker
+                  args:
+                    name: teacherCB
+                    fallbackUri: forward:/fallback/teachers
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      teacherCB:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 4
+        minimumNumberOfCalls: 4
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 2
+  timelimiter:
+    instances:
+      teacherCB:
+        timeoutDuration: 3s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway,circuitbreakers
