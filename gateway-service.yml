@@ -20,26 +20,25 @@ spring:
                 - AddResponseHeader=X-Gateway, gateway-service
                 - name: CircuitBreaker
                   args:
-                    name: teacherCB
-                    fallbackUri: forward:/fallback/teachers
+                    name: teacherCircuitBreaker
 
 resilience4j:
   circuitbreaker:
-    instances:
-      teacherCB:
+    configs:
+      default:
         slidingWindowType: COUNT_BASED
-        slidingWindowSize: 4
-        minimumNumberOfCalls: 4
+        slidingWindowSize: 5
+        minimumNumberOfCalls: 5
         failureRateThreshold: 50
         waitDurationInOpenState: 10s
-        permittedNumberOfCallsInHalfOpenState: 2
+        permittedNumberOfCallsInHalfOpenState: 3
   timelimiter:
     instances:
-      teacherCB:
-        timeoutDuration: 3s
+      teacherCircuitBreaker:
+        timeoutDuration: 2s
 
 management:
   endpoints:
     web:
       exposure:
-        include: health,info,gateway,circuitbreakers
+        include: health,info,gateway,circuitbreakers,circuitbreakerevents
