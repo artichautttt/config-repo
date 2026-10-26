@@ -21,6 +21,12 @@ spring:
                 - name: CircuitBreaker
                   args:
                     name: teacherCircuitBreaker
+                    fallbackUri: forward:/fallback/teachers
+                    statusCodes:
+                      - 500
+                      - 502
+                      - 503
+                      - 504
 
 resilience4j:
   circuitbreaker:
