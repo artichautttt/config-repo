@@ -1,0 +1,7 @@
+# À AJOUTER à la racine de config-repo : clés JWKS via le réseau interne, issuer inchangé (localhost:8090)
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://keycloak:8080/realms/campus/protocol/openid-connect/certs
